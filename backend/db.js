@@ -3,6 +3,7 @@ import Database from "better-sqlite3";
 import bcrypt from "bcryptjs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { products as seedProducts } from "./productsSeedData.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const db = new Database(path.join(__dirname, "herran.db"));
@@ -67,4 +68,18 @@ if (!existing) {
   const hash = bcrypt.hashSync(adminPass, 12);
   db.prepare("INSERT INTO admins (email, password_hash) VALUES (?, ?)").run(adminEmail, hash);
   console.log(`Admin creado: ${adminEmail}`);
+}
+
+// Auto-siembra el catálogo si la tabla de productos está vacía. Esto es
+// necesario porque el disco de servicios como Render (plan free) es efímero:
+// cada reinicio/redeploy parte de una base de datos nueva, y no hay forma de
+// correr "npm run seed" manualmente en producción. Con esto el catálogo
+// siempre está disponible sin intervención manual.
+const productCount = db.prepare("SELECT COUNT(*) c FROM products").get().c;
+if (productCount === 0) {
+  const insertProduct = db.prepare(`INSERT INTO products (name, brand, description, price, compare_at_price, category, gender, stock, image_url, featured, is_new)
+    VALUES (@name, @brand, @description, @price, @compare_at_price, @category, @gender, @stock, @image_url, @featured, @is_new)`);
+  const tx = db.transaction((rows) => rows.forEach((r) => insertProduct.run({ compare_at_price: null, ...r })));
+  tx(seedProducts);
+  console.log(`Catálogo auto-sembrado: ${seedProducts.length} productos.`);
 }
