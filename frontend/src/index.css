@@ -85,16 +85,11 @@ img { max-width: 100%; display: block; }
   background-image: repeating-linear-gradient(45deg, rgba(201,162,75,.03) 0 2px, transparent 2px 42px);
   pointer-events: none;
 }
-.hero-full-glow {
-  position: absolute; top: 50%; right: 8%; width: 380px; height: 380px; border-radius: 50%; transform: translateY(-50%);
-  background: radial-gradient(circle, rgba(201,162,75,.32) 0%, rgba(201,162,75,.08) 55%, transparent 75%);
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-.hero-full-bottle {
-  position: absolute; right: 6%; top: 52%; transform: translateY(-50%);
-  max-height: 460px; width: auto; object-fit: contain;
-  filter: drop-shadow(0 30px 34px rgba(0,0,0,.55));
-  animation: floatBottle 5s ease-in-out infinite;
+.hero-full-photo { background: #14110f; }
+.hero-full-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-full-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(10,8,6,.82) 0%, rgba(10,8,6,.55) 45%, rgba(10,8,6,.25) 75%);
 }
 .hero-full-content { position: relative; z-index: 2; max-width: 540px; padding: 60px 6%; }
 .hero-full-eyebrow { color: var(--gold-light); letter-spacing: 3px; text-transform: uppercase; font-size: 13px; margin: 0 0 18px; animation: fadeUp .6s ease both; }
@@ -109,14 +104,6 @@ img { max-width: 100%; display: block; }
 .btn-outline { border: 1px solid var(--gold); color: var(--gold-light); background: transparent; padding: 13px 32px; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 2px; transition: background .2s, color .2s; }
 .btn-outline:hover { background: rgba(201,162,75,.12); }
 
-@keyframes floatBottle {
-  0%, 100% { transform: translateY(-50%) rotate(-0.5deg); }
-  50% { transform: translateY(calc(-50% - 16px)) rotate(0.5deg); }
-}
-@keyframes pulseGlow {
-  0%, 100% { opacity: .7; transform: translateY(-50%) scale(1); }
-  50% { opacity: 1; transform: translateY(-50%) scale(1.08); }
-}
 
 /* ============ CATEGORY TILES ============ */
 .section-eyebrow { text-align: center; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-size: 12px; margin: 0 0 10px; }
@@ -283,19 +270,9 @@ img { max-width: 100%; display: block; }
 @media (max-width: 980px) {
   .spotlight-banner { grid-template-columns: 1fr; }
   .spotlight-img { min-height: 200px; }
-  .hero-full { min-height: auto; padding: 40px 0 260px; }
+  .hero-full { min-height: auto; padding: 40px 0 80px; }
   .hero-full-content { max-width: 100%; text-align: center; margin: 0 auto; padding: 20px 24px 0; }
   .hero-full-ctas { justify-content: center; }
-  .hero-full-bottle { right: 50%; transform: translate(50%, 30px); top: auto; bottom: 0; max-height: 260px; }
-  .hero-full-glow { right: 50%; transform: translate(50%, 30px); top: auto; bottom: 20px; width: 240px; height: 240px; }
-  @keyframes floatBottle {
-    0%, 100% { transform: translate(50%, 30px) rotate(-0.5deg); }
-    50% { transform: translate(50%, 14px) rotate(0.5deg); }
-  }
-  @keyframes pulseGlow {
-    0%, 100% { opacity: .7; transform: translate(50%, 30px) scale(1); }
-    50% { opacity: 1; transform: translate(50%, 30px) scale(1.08); }
-  }
   .story-inner { grid-template-columns: 1fr; gap: 36px; padding: 60px 24px; }
   .story-img { max-width: 320px; margin: 0 auto; }
   .value-props-inner { grid-template-columns: 1fr; }

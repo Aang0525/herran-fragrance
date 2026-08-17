@@ -25,14 +25,13 @@ export default function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="hero-full">
-        <div className="hero-full-glow" aria-hidden="true" />
+      <section className="hero-full hero-full-photo">
         <img
-          src="/products/rabanne-one-million.png"
-          alt=""
-          aria-hidden="true"
-          className="hero-full-bottle"
+          src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=2000&auto=format&fit=crop"
+          alt="Frasco de perfume Herran Fragrance sobre fondo oscuro"
+          className="hero-full-photo-img"
         />
+        <div className="hero-full-photo-overlay" aria-hidden="true" />
         <div className="hero-full-content">
           <p className="hero-full-eyebrow">Alta perfumería · Edición 2026</p>
           <h1 className="hero-full-title">Herran<br />Fragrance</h1>
